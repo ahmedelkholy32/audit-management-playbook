@@ -19,7 +19,7 @@
     - name: Clone update-audit-rules.sh scripts to the server
       copy:
         src: files/update-audit-rules.sh
-        dest: /etc/cron.hourly/update-audit-rules.sh
+        dest: /etc/cron.hourly/update-audit-rules # By default, run-parts does NOT allow dots in filenames
         force: yes
         owner: root
         group: root
