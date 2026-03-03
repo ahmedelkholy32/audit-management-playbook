@@ -1,0 +1,30 @@
+[defaults]
+
+# Inventory location
+inventory = ./inventory
+
+# Configure connection
+remote_user = ansible
+remote_port = 22
+ask_pass = no
+# private_key_file = secrets/id_ed25519
+host_key_checking = no # When Ansible connects to a host over SSH for the first time, OpenSSH wants to verify that the server is trusted
+
+# Configure parallelism
+# we are manage linux hosts. so the most of work will be done on managed hosted.
+forks = 10 ; simultaneous connections for single task. Connect to 10 Host at the same time.
+
+# Configure ansible
+inject_facts_as_vars = no ; Stop call facts by old way like ansible_hostname. it should be ansible_facts['hostname'].
+nocows = yes ; Disable cow log for more readable.
+interpreter_python = auto_silent ; Global setting to suppress all warnings
+
+[privilege_escalation]
+become = yes
+become_method = sudo
+become_user = root
+become_ask_pass = no
+
+# Settings that affect how Ansible uses SSH to connect to hosts
+#[ssh_connection]
+#ssh_args = -o IdentitiesOnly=yes ; To force Ansible to use only your private_key_file key

@@ -1,0 +1,26 @@
+---
+- name: Manage the audit service for specific hosts/groups
+  hosts: "{{ servers | default('all') }}"
+  gather_facts: no # Disable it for fast.
+  tasks:
+    - name: Install auditd package
+      apt:
+        name: auditd
+        state: present
+        # update_cache: yes
+        # cache_valid_time: 120
+    
+    - name: Enable audtid service
+      service:
+        name: auditd
+        state: started
+        enabled: yes
+    
+    - name: Clone update-audit-rules.sh scripts to the server
+      copy:
+        src: files/update-audit-rules.sh
+        dest: /etc/cron.hourly/update-audit-rules.sh
+        force: yes
+        owner: root
+        group: root
+        mode: 0700

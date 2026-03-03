@@ -1,0 +1,7 @@
+[group1]
+host1  ansible_host=x.x.x.x
+host2  ansible_host=x.x.x.x
+
+[group2]
+host3  ansible_host=x.x.x.x
+host4  ansible_host=x.x.x.x
